@@ -6,13 +6,14 @@
 #    By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/30 10:36:02 by zamohame          #+#    #+#              #
-#    Updated: 2025/10/30 11:07:11 by zamohame         ###   ########.fr        #
+#    Updated: 2025/11/03 15:44:30 by zamohame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = cub3D
 
 SRC         = src/render.c \
+			  src/raycasting.c \
 			  src/player.c \
 			  src/main.c
 

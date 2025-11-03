@@ -6,12 +6,17 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 10:58:10 by zamohame          #+#    #+#             */
-/*   Updated: 2025/10/30 13:57:10 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:58:54 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define tile_size 10
+# define step_size 0.01
+# define win_width 800
+# define win_height 600
 
 # include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
@@ -35,10 +40,14 @@ typedef struct s_data
 
 typedef struct s_player
 {
-	int		player_x;
-	int		player_y;
+	double		x;
+	double		y;
+	double		dir;
 }			t_player;
 
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	draw_tile(t_data *img, int x, int start_y, int color);
+void	draw_minimap(t_data *img, char **map, t_player *player);
 
+double	cast_one_ray(t_player *player, char **map, double ray_angle, t_data *img);
 #endif
