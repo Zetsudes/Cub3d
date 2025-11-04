@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:36:18 by zamohame          #+#    #+#             */
-/*   Updated: 2025/11/03 15:59:35 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/11/04 14:03:17 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	draw_tile(t_data *img, int x, int y, int color)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < tile_size)
@@ -40,38 +40,39 @@ void	draw_tile(t_data *img, int x, int y, int color)
 	}
 }
 
-double cast_one_ray(t_player *player, char **map, double ray_angle, t_data *img)
+void	draw_wall(t_data *img, int x, double dist)
 {
-	double x;
-	double y;
-	int row;
-	int col;
-	
-	x = player->x;
-	y = player->y;
-	row = (int)y;
-	col = (int)x;
-	while (map[row][col] != '1')
+	double	plane;
+	int		wall_height;
+	int		top;
+	int		bottom;
+	int		y;
+
+	if (dist < 0.0001)
+		dist = 0.0001;
+	plane = (win_width / 2) / tan(FOV / 2);
+	wall_height = (int)((tile_size * plane) / dist);
+	top = (win_height / 2) - (wall_height / 2);
+	bottom = (win_height / 2) + (wall_height / 2);
+	if (top < 0)
+		top = 0;
+	if (bottom >= win_height)
+		bottom = win_height - 1;
+	y = top;
+	while (y <= bottom)
 	{
-		x += cos(ray_angle) * step_size;
-		y += cos(ray_angle) * step_size;
-		row = (int)y;
-		col = (int)x;
-		my_mlx_pixel_put(img, (int)(x * tile_size), (int)(y * tile_size), 0x00FF00);
+		my_mlx_pixel_put(img, x, y, 0xAAAAAA);
+		y++;
 	}
-	double dx = x - player->x;
-	double dy = y - player->y;
-	double distance = sqrt(dx * dx + dy * dy);
-	return (distance);
 }
 
 void	draw_minimap(t_data *img, char **map, t_player *player)
 {
-	int row;
-	int col;
-	int color;
-	int x;
-	int y;
+	int	row;
+	int	col;
+	int	color;
+	int	x;
+	int	y;
 
 	row = 0;
 	while (map[row])
