@@ -6,7 +6,7 @@
 /*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 10:58:10 by zamohame          #+#    #+#             */
-/*   Updated: 2025/11/17 14:02:06 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:17:25 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 # define tile_size 1
 # define step_size 0.05
-# define MOVE_SPEED 0.10
-# define ROT_SPEED 0.06
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.03
 # define PLANE_LEN 0.66
 # define win_width 800
 # define win_height 600
