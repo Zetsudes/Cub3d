@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 11:31:36 by zamohame          #+#    #+#             */
-/*   Updated: 2025/11/10 13:57:08 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:47:43 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ void	init_player(t_player *p, t_map *map)
 {
 	p->x = (double)map->player_start.x + 0.5;
 	p->y = (double)map->player_start.y + 0.5;
-	if (map->player_start_dir == PLAYER_DIR_EAST)
+	if (map->player_start_dir == 'E')
 	{
 		p->dir_x = 1.0;
 		p->dir_y = 0.0;
 		p->plane_x = 0.0;
 		p->plane_y = PLANE_LEN;
 	}
-	else if (map->player_start_dir == PLAYER_DIR_WEST)
+	else if (map->player_start_dir == 'W')
 	{
 		p->dir_x = -1.0;
 		p->dir_y = 0.0;
 		p->plane_x = 0.0;
 		p->plane_y = -PLANE_LEN;
 	}
-	else if (map->player_start_dir == PLAYER_DIR_NORTH)
+	else if (map->player_start_dir == 'N')
 	{
 		p->dir_x = 0.0;
 		p->dir_y = -1.0;
