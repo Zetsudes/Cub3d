@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:12:57 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/29 21:23:08 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/29 22:47:32 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,18 @@ static int	get_file_height_width(t_map *map, char *filename)
 		map->height++;
 		line = get_next_line(fd);
 	}
-	clode(fd);
+	close(fd);
 	return (map->height);
 }
 
+// ici va falloir au ejarrive a intergrer le parsing de la config 
 void	parse_map(t_map *map, char *filename)
 {
 	int		fd;
 	int		y;
 
 	fd = open(filename, O_RDONLY);
-	map->height = get_file_height_width(fd, &map->width);
+	map->height = get_file_height_width(map, filename);
 	map->data = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->data)
 		exit(1);
