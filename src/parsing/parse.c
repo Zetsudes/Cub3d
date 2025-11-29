@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:12:57 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/28 22:39:12 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/29 18:47:08 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ void parse(char *filename)
 
 	fd = open_cub_file(filename);
 	while ((line = get_next_line(fd)) != NULL)
-	{}
+		free(line);
+	close(fd);
 }

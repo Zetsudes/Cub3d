@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 14:49:38 by lfiorell@st       #+#    #+#             */
-/*   Updated: 2025/11/28 22:03:29 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/29 19:02:50 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(void)
 {
 	if (ac != 2)
 		return (1);
-		
+
     t_game  game;
 
     char *map_data[] = {
@@ -32,12 +32,12 @@ int main(void)
         NULL
     };
 
-    game.map.data = map_data;
+    /*game.map.data = map_data;
     game.map.width = 6;
     game.map.height = 5;
     game.map.player_start.x = 4
     game.map.player_start.y = 3;
-    game.map.player_start_dir = 'N';
+    game.map.player_start_dir = 'N';*/
 
     game.mlx = mlx_init();
     if (!game.mlx)
