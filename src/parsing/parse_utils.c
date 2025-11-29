@@ -6,13 +6,13 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 19:16:25 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/29 20:30:33 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/29 21:30:56 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static char	**map_alloc_and_fill(char **map, int height)
+static char	**map_copy_alloc_and_fill(char **map_copy, int height)
 {
 	char	**copy;
 	int		i;
@@ -23,7 +23,7 @@ static char	**map_alloc_and_fill(char **map, int height)
 	i = 0;
 	while (i < height)
 	{
-		copy[i] = ft_strdup(map[i]);
+		copy[i] = ft_strdup(map_copy[i]);
 		if (!copy[i])
 		{
 			while (--i >= 0)
@@ -37,16 +37,16 @@ static char	**map_alloc_and_fill(char **map, int height)
 	return (copy);
 }
 
-char	**map_copy(char **map)
+char	**map_copy(char **map_copy)
 {
 	int		height;
 
-	if (!map)
+	if (!map_copy)
 		return (NULL);
 	height = 0;
-	while (map[height])
+	while (map_copy[height])
 		height++;
-	return (map_alloc_and_fill(map, height));
+	return (map_copy_alloc_and_fill(map_copy, height));
 }
 
 int is_traversable(char c)
@@ -63,7 +63,7 @@ void check_valid_char(char c)
 {
 	if (!(c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' '))
 	{
-		printf("Error: invalid character in map: '%c'\n", c);
+		printf("Error: invalid character in map_copy: '%c'\n", c);
 		exit(1);
 	}
 }
