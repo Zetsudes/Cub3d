@@ -6,21 +6,17 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:12:57 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/30 15:43:24 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/30 16:08:37 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static void	read_config_lines(char *filename, t_config *config)
+static void	read_config_lines(int fd, t_config *config)
 {
-	int		fd;
 	int		config_count;
 	char	*line;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		exit(1);
 	config_count = 0;
 	line = get_next_line(fd);
 	while (line && config_count < 6)
@@ -56,7 +52,7 @@ static int	get_map_height_width(t_map *map, int fd)
 	return (map->height);
 }
 
-void	parse_map(t_map *map, char *filename, t_config *config)
+void	parse_map(t_map *map, char *filename)
 {
 	int		fd;
 	int		y;
@@ -64,7 +60,7 @@ void	parse_map(t_map *map, char *filename, t_config *config)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		exit(1);
-	read_config_lines(fd, config);
+	read_config_lines(fd, &map->config);
 	map->height = get_map_height_width(map, fd);
 	map->data = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->data)

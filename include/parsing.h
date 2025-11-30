@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:04 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/30 15:45:30 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/30 16:04:33 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@ typedef struct s_pos
 	int		y;
 }	t_pos;
 
-typedef struct s_map
-{
-	char	**data;
-	int		width;
-	int		height;
-	t_pos	player_start;
-	char 	player_start_dir;
-} t_map;
-
 typedef struct s_config {
 	char *north;
 	char *south;
@@ -42,8 +33,19 @@ typedef struct s_config {
 	int ceiling[3];
 } t_config;
 
+typedef struct s_map
+{
+	char	**data;
+	int		width;
+	int		height;
+	t_pos	player_start;
+	char 	player_start_dir;
+	t_config config;
+} t_map;
+
+
 // parse.c
-void	parse_map(t_map *map, char *filename, t_config *config);
+void	parse_map(t_map *map, char *filename);
 
 // parse_file.c
 int			open_cub_file(char *filename);
