@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:12:57 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/30 19:50:44 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:59:20 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,8 @@ static void	read_config_lines(int fd, t_config *config)
 			line = get_next_line(fd);
 		}
 		else
-		{
-			line = get_next_line(fd);
-			free(line);
 			return;
-		}
 	}
-	return;
 }
 
 static void	read_map_lines(int fd, t_map *map)
@@ -77,11 +72,16 @@ static void	read_map_lines(int fd, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
-		map->data = add_line_in_tab(map->data, size, line);
-		size++;
-		if ((int)ft_strlen(line) > map->width)
-			map->width = ft_strlen(line);
-		map->height++;
+		if (*line != '\n' && *line != '\0')
+		{
+			map->data = add_line_in_tab(map->data, size, line);
+			size++;
+			if ((int)ft_strlen(line) > map->width)
+				map->width = ft_strlen(line);
+			map->height++;
+		}
+		else
+			free(line);
 		line = get_next_line(fd);
 	}
 }
