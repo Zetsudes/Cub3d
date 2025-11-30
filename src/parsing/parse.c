@@ -6,18 +6,42 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:12:57 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/29 22:47:32 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:43:24 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static int	get_file_height_width(t_map *map, char *filename)
+static void	read_config_lines(char *filename, t_config *config)
 {
 	int		fd;
+	int		config_count;
 	char	*line;
 
-	fd = open_cub_file(filename);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		exit(1);
+	config_count = 0;
+	line = get_next_line(fd);
+	while (line && config_count < 6)
+	{
+		if (is_texture_line(line) &&
+			parse_texture_line(line, config))
+				config_count++;
+		else if (is_color_line(line) &&
+			parse_color_line(line, config))
+				config_count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	close(fd);
+}
+
+static int	get_map_height_width(t_map *map, int fd)
+{
+	char *line;
+
 	map->height = 0;
 	map->width = 0;
 	line = get_next_line(fd);
@@ -29,18 +53,19 @@ static int	get_file_height_width(t_map *map, char *filename)
 		map->height++;
 		line = get_next_line(fd);
 	}
-	close(fd);
 	return (map->height);
 }
 
-// ici va falloir au ejarrive a intergrer le parsing de la config 
-void	parse_map(t_map *map, char *filename)
+void	parse_map(t_map *map, char *filename, t_config *config)
 {
 	int		fd;
 	int		y;
 
 	fd = open(filename, O_RDONLY);
-	map->height = get_file_height_width(map, filename);
+	if (fd < 0)
+		exit(1);
+	read_config_lines(fd, config);
+	map->height = get_map_height_width(map, fd);
 	map->data = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->data)
 		exit(1);
@@ -55,6 +80,7 @@ void	parse_map(t_map *map, char *filename)
 	map->data[y] = NULL;
 	close(fd);
 }
+
 
 
 

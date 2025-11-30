@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:04 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/29 22:52:09 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:45:30 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_config {
 } t_config;
 
 // parse.c
-void		parse_map(t_map *map_copy, char *filename);
+void	parse_map(t_map *map, char *filename, t_config *config);
 
 // parse_file.c
 int			open_cub_file(char *filename);
@@ -56,6 +56,10 @@ char		**map_copy(char **map_copy);
 int			is_traversable(char c);
 int			is_filled_or_wall(char c);
 void		check_valid_char(char c);
+
+// parse_config.c
+int			is_texture_line(char *line);
+int			is_color_line(char *line);
 
 // parse_textures_config.c
 int			parse_texture_line(char *line, t_config *config);

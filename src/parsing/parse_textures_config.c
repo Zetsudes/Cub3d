@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:00:54 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/29 22:43:47 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:28:43 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 static int	check_texture_identifier(char *line, int *i)
 {
-	if (line[0] == 'N' && line[1] == 'O')
-		*i = 2;
-	else if (line[0] == 'S' && line[1] == 'O')
-		*i = 2;
-	else if (line[0] == 'W' && line[1] == 'E')
-		*i = 2;
-	else if (line[0] == 'E' && line[1] == 'A')
-		*i = 2;
-	else
-	{
-		printf("Error\nInvalid texture identifier\n");
+	if (!line || !i)
 		return (0);
+	if ((line[0] == 'N' && line[1] == 'O')
+		|| (line[0] == 'S' && line[1] == 'O')
+		|| (line[0] == 'W' && line[1] == 'E')
+		|| (line[0] == 'E' && line[1] == 'A'))
+	{
+		*i = 2;
+		return (1);
 	}
-	return (1);
+	return (0);
 }
+
 
 static int	get_texture_index(char *line, int *i)
 {
@@ -37,7 +35,7 @@ static int	get_texture_index(char *line, int *i)
 		printf("Error\nNull line or index pointer\n");
 		return (0);
 	}
-	if (!check_identifier(line, i))
+	if (!check_texture_identifier(line, i))
 		return (0);
 	if (line[*i] != ' ')
 	{
@@ -66,7 +64,10 @@ static int	store_texture_path(char *line, int i, t_config *config)
 		config->west = ft_strdup(line + i);
 	else if (line[0] == 'E' && line[1] == 'A')
 		config->east = ft_strdup(line + i);
-	if (!config->north || !config->south || !config->west || !config->east)
+	if ((line[0] == 'N' && line[1] == 'O' && !config->north)
+		|| (line[0] == 'S' && line[1] == 'O' && !config->south)
+		|| (line[0] == 'W' && line[1] == 'E' && !config->west)
+		|| (line[0] == 'E' && line[1] == 'A' && !config->east))
 	{
 		printf("Error\nFailed to allocate texture path\n");
 		return (0);
