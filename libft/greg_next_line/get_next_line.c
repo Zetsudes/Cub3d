@@ -3,24 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 15:23:23 by zamohame          #+#    #+#             */
-/*   Updated: 2025/08/14 09:35:20 by zamohame         ###   ########.fr       */
+/*   Created: 2025/04/08 10:01:14 by pmeimoun          #+#    #+#             */
+/*   Updated: 2025/04/15 16:17:48 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*extract_line(char *buffer)
+char	*ft_fillbuf_w_tmp(char *buffer, int fd)
 {
-	int		i;
+	char	*temp;
+	int		bytes_read;
+
+	temp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!temp)
+		return (NULL);
+	bytes_read = 1;
+	while (bytes_read > 0 && !ft_strchr(buffer, '\n'))
+	{
+		bytes_read = read(fd, temp, BUFFER_SIZE);
+		if (bytes_read < 0)
+		{
+			free(temp);
+			return (NULL);
+		}
+		temp[bytes_read] = '\0';
+		buffer = ft_strjoin(buffer, temp);
+	}
+	free(temp);
+	return (buffer);
+}
+
+char	*ft_extract_first_line(char *buffer)
+{
 	char	*line;
+	int		i;
 
 	i = 0;
+	if (!buffer)
+		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	line = malloc(i + 2);
+	line = malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -30,95 +56,77 @@ char	*extract_line(char *buffer)
 		i++;
 	}
 	if (buffer[i] == '\n')
-	{
-		line[i] = buffer[i];
-		i++;
-	}
+		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
 
-char	*save_remainder(char *buffer)
+char	*ft_remove_first_line(char *buffer)
 {
+	char	*new_buffer;
 	int		i;
 	int		j;
-	char	*remainder;
 
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (!buffer[i] || buffer[i + 1] == '\0')
-		return (free_buffer(buffer));
-	remainder = malloc(ft_strlen(buffer) - i);
-	if (!remainder)
-		return (free_buffer(buffer));
+	if (buffer[i] == '\0')
+	{
+		free(buffer);
+		return (NULL);
+	}
+	new_buffer = malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
+	if (new_buffer == NULL)
+	{
+		free(buffer);
+		return (NULL);
+	}
 	i++;
 	j = 0;
 	while (buffer[i])
-		remainder[j++] = buffer[i++];
-	remainder[j] = '\0';
+		new_buffer[j++] = buffer[i++];
+	new_buffer[j] = '\0';
 	free(buffer);
-	return (remainder);
-}
-
-char	*free_buffer(char *buffer)
-{
-	if (buffer)
-		free(buffer);
-	return (NULL);
-}
-
-int	handle_line(int fd, char **buffer, char *temp)
-{
-	int		bytes_read;
-	char	*bjr;
-
-	bytes_read = 0;
-	while (!ft_strchr(*buffer, '\n'))
-	{
-		bytes_read = read(fd, temp, BUFFER_SIZE);
-		if ((bytes_read) <= 0)
-			break ;
-		temp[bytes_read] = '\0';
-		bjr = *buffer;
-		*buffer = ft_strjoin(*buffer, temp);
-		free(bjr);
-		if (!*buffer)
-		{
-			free(temp);
-			return (-1);
-		}
-	}
-	if (bytes_read == -1)
-		return (-1);
-	return (bytes_read);
+	return (new_buffer);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*buffer = NULL;
 	char		*line;
-	char		*temp;
 
-	buffer = NULL;
-	temp = malloc(BUFFER_SIZE + 1);
-	if (fd < 0 || BUFFER_SIZE <= 0 || !temp)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		free(temp);
+		if (buffer)
+		{
+			free(buffer);
+			buffer = NULL;
+		}
 		return (NULL);
 	}
+	buffer = ft_fillbuf_w_tmp(buffer, fd);
 	if (!buffer)
-		buffer = ft_strdup("");
-	handle_line(fd, &buffer, temp);
-	if (!buffer || *buffer == '\0')
+		return (NULL);
+	line = ft_extract_first_line(buffer);
+	buffer = ft_remove_first_line(buffer);
+	if (!buffer && ft_strlen(line) == 0)
 	{
-		free(temp);
-		free(buffer);
-		buffer = NULL;
+		free(line);
 		return (NULL);
 	}
-	line = extract_line(buffer);
-	buffer = save_remainder(buffer);
-	free(temp);
 	return (line);
 }
+// #include <stdio.h>
+
+// int main()
+// {
+// 	char *line;
+// 	int fd = open("./petit_prince.txt", O_RDONLY);
+// 	line = get_next_line(fd);
+// 	while (line != NULL)
+// 	{
+// 		printf("%s", line);
+// 		free(line);
+// 		line = get_next_line(fd);
+// 	}
+// }

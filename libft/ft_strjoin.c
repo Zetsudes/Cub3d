@@ -3,44 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamohame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:51:39 by zamohame          #+#    #+#             */
-/*   Updated: 2024/11/06 16:27:04 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:42:53 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int		len1;
-	int		len2;
-	char	*res;
+	int		i;
+	int		j;
+	char	*new_s;
 
-	if (!s1 || !s2)
+	i = 0;
+	j = 0;
+	if (!s1 && !s2)
+		return (ft_strdup(""));
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	new_s = malloc(sizeof(char) * (ft_strlen(s1)) + ft_strlen(s2) + 1);
+	if (new_s == NULL)
 		return (NULL);
-	len1 = ft_strlen((char *)s1);
-	len2 = ft_strlen((char *)s2);
-	res = (char *)malloc(len1 + len2 + 1);
-	if (!res)
-		return (NULL);
-	ft_memcpy(res, s1, len1);
-	ft_memcpy(res + len1, s2, len2);
-	res[len1 + len2] = '\0';
-	return (res);
+	while (s1[i] != '\0')
+	{
+		new_s[i] = s1[i];
+		i++;
+	}
+	free(s1);
+	while (s2[j] != '\0')
+		new_s[i++] = s2[j++];
+	new_s[i] = '\0';
+	return (new_s);
 }
-/*
-int	main(void)
-{
-	char	*res;
-	char	s1[] = "Hello";
-	char	s2[] = "les ploucs";
-
-	res = ft_strjoin(s1, s2);
-	printf("%s", res);
-	free(res);
-}
-*/

@@ -64,7 +64,7 @@ void	verify_map_copy(char **map_copy, int player_x, int player_y, int width, int
 	y = 0;
 	while (map_copy[y])
 	{
-		x = 0;
+				x = 0;
 		while (map_copy[y][x])
 		{
 			if (map_copy[y][x] == 'F' && (y == 0 || map_copy[y + 1] == NULL

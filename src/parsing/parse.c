@@ -6,11 +6,34 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:12:57 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/30 16:08:37 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:50:44 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+static char	**add_line_in_tab(char **tab, int size, char *line)
+{
+	char **new_tab;
+	int i;
+
+	new_tab = malloc(sizeof(char *) * (size + 2));
+	if (!new_tab)
+		exit(1);
+
+	i = 0;
+	while (i < size)
+	{
+		new_tab[i] = tab[i];
+		i++;
+	}
+	new_tab[size] = line;
+	new_tab[size + 1] = NULL;
+
+	if (tab)
+		free(tab);
+	return (new_tab);
+}
 
 static void	read_config_lines(int fd, t_config *config)
 {
@@ -28,56 +51,54 @@ static void	read_config_lines(int fd, t_config *config)
 			parse_color_line(line, config))
 				config_count++;
 		free(line);
-		line = get_next_line(fd);
+		if (config_count < 6)
+		{
+			line = get_next_line(fd);
+		}
+		else
+		{
+			line = get_next_line(fd);
+			free(line);
+			return;
+		}
 	}
-	free(line);
-	close(fd);
+	return;
 }
 
-static int	get_map_height_width(t_map *map, int fd)
+static void	read_map_lines(int fd, t_map *map)
 {
 	char *line;
+	int size;
 
+	map->data = NULL;
 	map->height = 0;
 	map->width = 0;
+	size = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
+		map->data = add_line_in_tab(map->data, size, line);
+		size++;
 		if ((int)ft_strlen(line) > map->width)
 			map->width = ft_strlen(line);
-		free(line);
 		map->height++;
 		line = get_next_line(fd);
 	}
-	return (map->height);
 }
 
 void	parse_map(t_map *map, char *filename)
 {
-	int		fd;
-	int		y;
+	int fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		exit(1);
 	read_config_lines(fd, &map->config);
-	map->height = get_map_height_width(map, fd);
-	map->data = malloc(sizeof(char *) * (map->height + 1));
-	if (!map->data)
-		exit(1);
-	y = 0;
-	while (y < map->height)
-	{
-		map->data[y] = get_next_line(fd);
-		if (!map->data[y])
-			exit(1);
-		y++;
-	}
-	map->data[y] = NULL;
+	map->data = NULL;
+	map->height = 0;
+	map->width = 0;
+
+	read_map_lines(fd, map);
+
 	close(fd);
 }
-
-
-
-
-
