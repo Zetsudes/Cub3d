@@ -77,7 +77,6 @@ void	verify_map_copy(char **map_copy, int player_x, int player_y, int width, int
 		}
 		y++;
 	}
-	printf("map_copy is closed and valid!\n");
 }
 
 
