@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:04 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/30 16:04:33 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:12:44 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ typedef struct s_map
 
 // parse.c
 void	parse_map(t_map *map, char *filename);
+
+// read_map.c
+void	read_config_lines(int fd, t_config *config);
+void	read_map_lines(int fd, t_map *map);
 
 // parse_file.c
 int			open_cub_file(char *filename);

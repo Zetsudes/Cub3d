@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:00 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/28 22:40:57 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:05:16 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ int open_cub_file(char *filename)
 	}
 	return (fd);
 }
-
