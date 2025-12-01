@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/01 17:12:04 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/01 23:57:01 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ void	read_config_lines(int fd, t_config *config)
 		else if (is_color_line(line) &&
 			parse_color_line(line, config))
 				config_count++;
+		else if (ft_strncmp(line, "\n", 1) != 0)
+		{
+			printf("Error:trouver un truc");
+			free(line);
+			exit (1);
+		}
 		free(line);
 		if (config_count < 6)
 		{
@@ -72,7 +78,7 @@ static void	remove_newline(char *line)
 		line[i - 1] = '\0';
 }
 
-static void	process_map_line(char *line, t_map *map, int size)
+static void	process_map_line(char *line, t_map *map)
 {
 	int	i;
 	int	len;
@@ -84,7 +90,7 @@ static void	process_map_line(char *line, t_map *map, int size)
 		check_valid_char(line[i]);
 		i++;
 	}
-	map->data = add_line_in_tab(map->data, size, line);
+	map->data = add_line_in_tab(map->data, map->height, line);
 	if (len > map->width)
 		map->width = len;
 	map->height++;
@@ -93,23 +99,29 @@ static void	process_map_line(char *line, t_map *map, int size)
 void	read_map_lines(int fd, t_map *map)
 {
 	char	*line;
-	int		size;
+	int		i;
+	int		has_content;
 
 	map->data = NULL;
 	map->height = 0;
 	map->width = 0;
-	size = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
 		remove_newline(line);
-		if (*line != '\n' && *line != '\0')
+		has_content = 0;
+		i = 0;
+		while (line[i])
 		{
-			process_map_line(line, map, size);
-			size++;
+			if (line[i] != ' ')
+				has_content = 1;
+			i++;
 		}
+		if (has_content)
+			process_map_line(line, map);
 		else
 			free(line);
 		line = get_next_line(fd);
 	}
 }
+

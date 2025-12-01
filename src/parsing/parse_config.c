@@ -24,3 +24,4 @@ int	is_color_line(char *line)
 	return (0);
 }
 
+
