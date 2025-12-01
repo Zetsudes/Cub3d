@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 14:49:38 by lfiorell@st       #+#    #+#             */
-/*   Updated: 2025/12/01 16:50:48 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/01 21:59:14 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int main(int ac, char **av)
     game.map.player_start.x = 4
     game.map.player_start.y = 3;
     game.map.player_start_dir = 'N';*/
-	verify_map_copy(game.map.data, game.map.player_start.x, game.map.player_start.y,
-				game.map.width, game.map.height);
+	verify_map_copy(&game.map);
     game.mlx = mlx_init();
     if (!game.mlx)
         return (1);

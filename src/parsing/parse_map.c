@@ -77,23 +77,23 @@ static void	flood_fill_recursive(char **map_copy, int x, int y, int width, int h
 	}
 }
 
-void	verify_map_copy(char **map_copy, int player_x, int player_y, int width, int height)
+void	verify_map_copy(t_map *map)
 {
 	int	x;
 	int	y;
 
-	find_player(map_copy, &player_x, &player_y);
-	flood_fill_recursive(map_copy, player_x, player_y, width, height);
+	find_player(map->data, &map->player_start.x, &map->player_start.y);
+	flood_fill_recursive(map->data, map->player_start.x, map->player_start.y, map->width, map->height);
 	y = 0;
-	while (map_copy[y])
+	while (map->data[y])
 	{
-				x = 0;
-		while (map_copy[y][x])
+		x = 0;
+		while (map->data[y][x])
 		{
-			if (map_copy[y][x] == 'F' && (y == 0 || map_copy[y + 1] == NULL
-				|| x == 0 || map_copy[y][x + 1] == '\0'))
+			if (map->data[y][x] == 'F' && (y == 0 || map->data[y + 1] == NULL
+				|| x == 0 || map->data[y][x + 1] == '\0'))
 			{
-				printf("Conard: The map_copy is not closed\n");
+				printf("Error: The map is not closed\n");
 				exit(1);
 			}
 			x++;

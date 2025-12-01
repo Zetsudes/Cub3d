@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:04 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/01 17:12:44 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/01 21:59:44 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	read_map_lines(int fd, t_map *map);
 int			open_cub_file(char *filename);
 
 // parse_map.c
-void		verify_map_copy(char **map_copy, int player_x, int player_y, int width, int height);
+void		verify_map_copy(t_map *map);
 
 // parse_utils.c
 char		**map_copy(char **map_copy);
