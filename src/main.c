@@ -3,31 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 14:49:38 by lfiorell@st       #+#    #+#             */
-/*   Updated: 2025/11/28 21:01:33 by zetsu            ###   ########.fr       */
+/*   Updated: 2025/12/01 13:22:51 by zamohame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "../include/raycasting.h"
-#include "../minilibx-linux/mlx.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 int main(void)
 {
     t_game  game;
-
-    char *map_data[] = {
-        "111111",
-        "100001",
-        "101001",
-        "1000P1",
-        "111111",
-        NULL
-    };
 
     game.map.data = map_data;
     game.map.width = 6;
