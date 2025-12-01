@@ -27,8 +27,8 @@ static void	find_player(char **map, int *player_x, int *player_y)
 			if (map[y][x] == 'N' || map[y][x] == 'S' ||
 				map[y][x] == 'E' || map[y][x] == 'W')
 			{
-				*player_x = x;
-				*player_y = y;
+				*player_x = x + 0.5;
+				*player_y = y + 0.5;
 				return ;
 			}
 			x++;
@@ -73,13 +73,6 @@ static void	flood_fill_recursive(char **map_copy, int x, int y, int width, int h
 
 void	verify_map_copy(char **map_copy, int player_x, int player_y, int width, int height)
 {
-	//DEBUG
-	for (int i=0; i <= height; i++) {
-		dprintf(2, "%s", map_copy[i]);
-	}
-	dprintf(2, "\n=======================================\n");
-
-	//END_DEBUG
 	int	x;
 	int	y;
 

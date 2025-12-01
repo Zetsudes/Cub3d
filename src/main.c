@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 14:49:38 by lfiorell@st       #+#    #+#             */
-/*   Updated: 2025/11/29 21:42:25 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/01 16:50:48 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main(int ac, char **av)
 		return (1);
 	t_game  game;
 
+	ft_bzero(&game, sizeof(t_game));
 	parse_map(&game.map, av[1]);
     /*char *map_data[] = {
         "111111",
