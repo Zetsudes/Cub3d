@@ -12,16 +12,31 @@
 
 #include "parsing.h"
 
-static void	check_flood_conditions(char **map_copy, int x, int y, int width, int height)
+
+static void	find_player(char **map, int *player_x, int *player_y)
 {
-	if (y < 0 || x < 0 || x >= width || y >= height)
+	int y;
+	int x;
+
+	y = 0;
+	while (map[y])
 	{
-		printf("Error: The map_copy is not closed\n");
-		exit(1);
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'N' || map[y][x] == 'S' ||
+				map[y][x] == 'E' || map[y][x] == 'W')
+			{
+				*player_x = x;
+				*player_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
 	}
-	check_valid_char(map_copy[y][x]);
-	if (is_filled_or_wall(map_copy[y][x]))
-		return;
+	printf("Error: Player start position not found\n");
+	exit(1);
 }
 
 static void	flood_fill_recursive(char **map_copy, int x, int y, int width, int height)
@@ -30,6 +45,15 @@ static void	flood_fill_recursive(char **map_copy, int x, int y, int width, int h
 	int	dy[4];
 	int	i;
 
+	if (x < 0 || y < 0 || x >= width || y >= height)
+	{
+        printf("Error: The map is not closed\n");
+        exit(1);
+    }
+	if (map_copy[y][x] == 'F')
+		return;
+	if (!is_traversable(map_copy[y][x]))
+		return;
 	map_copy[y][x] = 'F';
 	dx[0] = 1;
 	dx[1] = -1;
@@ -42,25 +66,25 @@ static void	flood_fill_recursive(char **map_copy, int x, int y, int width, int h
 	i = 0;
 	while (i < 4)
 	{
-		if (is_traversable(map_copy[y + dy[i]][x + dx[i]]))
-			flood_fill_recursive(map_copy, x + dx[i], y + dy[i], width, height);
+		flood_fill_recursive(map_copy, x + dx[i], y + dy[i], width, height);
 		i++;
 	}
 }
 
-static void	flood_fill(char **map_copy, int x, int y, int width, int height)
-{
-	check_flood_conditions(map_copy, x, y, width, height);
-	if (is_traversable(map_copy[y][x]))
-		flood_fill_recursive(map_copy, x, y, width, height);
-}
-
 void	verify_map_copy(char **map_copy, int player_x, int player_y, int width, int height)
 {
+	//DEBUG
+	for (int i=0; i <= height; i++) {
+		dprintf(2, "%s", map_copy[i]);
+	}
+	dprintf(2, "\n=======================================\n");
+
+	//END_DEBUG
 	int	x;
 	int	y;
 
-	flood_fill(map_copy, player_x, player_y, width, height);
+	find_player(map_copy, &player_x, &player_y);
+	flood_fill_recursive(map_copy, player_x, player_y, width, height);
 	y = 0;
 	while (map_copy[y])
 	{
@@ -70,7 +94,7 @@ void	verify_map_copy(char **map_copy, int player_x, int player_y, int width, int
 			if (map_copy[y][x] == 'F' && (y == 0 || map_copy[y + 1] == NULL
 				|| x == 0 || map_copy[y][x + 1] == '\0'))
 			{
-				printf("Error: The map_copy is not closed\n");
+				printf("Conard: The map_copy is not closed\n");
 				exit(1);
 			}
 			x++;
