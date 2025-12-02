@@ -24,4 +24,16 @@ int	is_color_line(char *line)
 	return (0);
 }
 
+void	free_config(t_config *config)
+{
+	if (!config)
+	{
+		printf("Error\nfree_config called with NULL pointer\n");
+		return ;
+	}
+	free(config->north);
+	free(config->south);
+	free(config->west);
+	free(config->east);
+}
 

@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 14:49:38 by lfiorell@st       #+#    #+#             */
-/*   Updated: 2025/12/01 23:35:03 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:30:56 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ int main(int ac, char **av)
     mlx_put_image_to_window(game.mlx, game.win, game.img.img, 0, 0);
     setup_hooks(&game);
     mlx_loop(game.mlx);
+	free_config(&game.map.config);
     return (0);
 }

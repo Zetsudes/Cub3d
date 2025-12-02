@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:04 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/01 21:59:44 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 14:21:38 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			is_color_line(char *line);
 
 // parse_textures_config.c
 int			parse_texture_line(char *line, t_config *config);
+void		free_config(t_config *config);
 
 // parse_colors_config.c
 int			parse_color_line(char *line, t_config *config);
