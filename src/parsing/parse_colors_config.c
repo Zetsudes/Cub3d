@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:43:54 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/29 22:51:50 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:12:26 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	parse_rgb_values(char *line, int *r, int *g, int *b)
 
 	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
 	{
-		printf("Error\nInvalid color values: %d,%d,%d\n", *r, *g, *b);
+		printf("Error: Invalid color values: %d,%d,%d\n", *r, *g, *b);
 		return (0);
 	}
 	return (1);
@@ -64,7 +64,7 @@ static int	assign_color(char identifier, int r, int g, int b, t_config *config)
 	}
 	else
 	{
-		printf("Error\nInvalid color identifier: %c\n", identifier);
+		printf("Error: Invalid color identifier: %c\n", identifier);
 		return (0);
 	}
 	return (1);

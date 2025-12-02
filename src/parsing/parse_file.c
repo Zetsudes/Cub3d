@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:00 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/01 17:05:16 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:16:22 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int open_cub_file(char *filename)
 
 	if (!is_cub_file(filename))
 	{
-		printf("Error\nInvalid file extension (expected .cub)\n");
+		printf("Error: Invalid file extension (expected .cub)\n");
 		exit (-1);
 	}
 	if (fd < 0)
 	{
-		printf("Error\nCannot open .cub file\n");
+		printf("Error: Cannot open .cub file\n");
 		exit (-1);
 	}
 	return (fd);

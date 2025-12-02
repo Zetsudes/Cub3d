@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/01 23:57:01 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:15:44 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	read_config_lines(int fd, t_config *config)
 				config_count++;
 		else if (ft_strncmp(line, "\n", 1) != 0)
 		{
-			printf("Error:trouver un truc");
+			printf("Error: Invalid line in configuration file\n");
 			free(line);
 			exit (1);
 		}

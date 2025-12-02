@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 19:16:25 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/01 17:05:22 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:12:58 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void check_valid_char(char c)
 {
 	if (!(c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' '))
 	{
-		printf("Error: invalid character in map_copy: '%c'\n", c);
+		printf("Error: invalid character in map\n");
 		exit(1);
 	}
 }
