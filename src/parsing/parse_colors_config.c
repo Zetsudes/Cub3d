@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:43:54 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/02 17:04:55 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:12:02 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	ft_atoi_color(char *str, int *i)
 		(*i)++;
 	while (str[*i] != '\0' && str[*i] != ',')
 	{
+		if (str[*i] == '\n')
+			return (0);
 		if (str[*i] < '0' || str[*i] > '9')
 		{
 			printf("Error: Invalid character\n");
