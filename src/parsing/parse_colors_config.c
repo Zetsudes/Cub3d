@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:43:54 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/02 16:12:26 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:17:27 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	parse_rgb_values(char *line, int *r, int *g, int *b)
 	*r = ft_atoi_color(line, &i);
 	*g = ft_atoi_color(line, &i);
 	*b = ft_atoi_color(line, &i);
-
 	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
 	{
 		printf("Error: Invalid color values: %d,%d,%d\n", *r, *g, *b);
@@ -72,13 +71,8 @@ static int	assign_color(char identifier, int r, int g, int b, t_config *config)
 
 int	parse_color_line(char *line, t_config *config)
 {
-	int	r, g, b;
-
+	int r, g, b;
 	if (!parse_rgb_values(line, &r, &g, &b))
 		return (0);
 	return (assign_color(line[0], r, g, b, config));
 }
-
-
-
-

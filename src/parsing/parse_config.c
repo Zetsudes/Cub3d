@@ -33,4 +33,3 @@ void	free_config(t_config *config)
 	free(config->west);
 	free(config->east);
 }
-

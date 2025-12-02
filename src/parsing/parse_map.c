@@ -14,8 +14,8 @@
 
 static void	find_player(char **map, int *player_x, int *player_y)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (map[y])
@@ -23,8 +23,8 @@ static void	find_player(char **map, int *player_x, int *player_y)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'N' || map[y][x] == 'S' ||
-				map[y][x] == 'E' || map[y][x] == 'W')
+			if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
+				|| map[y][x] == 'W')
 			{
 				*player_x = x + 0.5;
 				*player_y = y + 0.5;
@@ -53,7 +53,8 @@ static int	can_flood(char **map_copy, int x, int y, int width, int height)
 	return (1);
 }
 
-static void	flood_fill_recursive(char **map_copy, int x, int y, int width, int height)
+static void	flood_fill_recursive(char **map_copy, int x, int y, int width,
+		int height)
 {
 	int	dx[4];
 	int	dy[4];
@@ -83,7 +84,8 @@ void	verify_map_copy(t_map *map)
 	int	y;
 
 	find_player(map->data, &map->player_start.x, &map->player_start.y);
-	flood_fill_recursive(map->data, map->player_start.x, map->player_start.y, map->width, map->height);
+	flood_fill_recursive(map->data, map->player_start.x, map->player_start.y,
+		map->width, map->height);
 	y = 0;
 	while (map->data[y])
 	{
@@ -91,7 +93,7 @@ void	verify_map_copy(t_map *map)
 		while (map->data[y][x])
 		{
 			if (map->data[y][x] == 'F' && (y == 0 || map->data[y + 1] == NULL
-				|| x == 0 || map->data[y][x + 1] == '\0'))
+					|| x == 0 || map->data[y][x + 1] == '\0'))
 			{
 				printf("Error: The map is not closed\n");
 				exit(1);

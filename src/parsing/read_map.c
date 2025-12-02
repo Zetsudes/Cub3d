@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/02 16:15:44 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:17:51 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 static char	**add_line_in_tab(char **tab, int size, char *line)
 {
-	char **new_tab;
-	int i;
+	char	**new_tab;
+	int		i;
 
 	new_tab = malloc(sizeof(char *) * (size + 2));
 	if (!new_tab)
 		exit(1);
-
 	i = 0;
 	while (i < size)
 	{
@@ -29,7 +28,6 @@ static char	**add_line_in_tab(char **tab, int size, char *line)
 	}
 	new_tab[size] = line;
 	new_tab[size + 1] = NULL;
-
 	if (tab)
 		free(tab);
 	return (new_tab);
@@ -44,17 +42,15 @@ void	read_config_lines(int fd, t_config *config)
 	line = get_next_line(fd);
 	while (line && config_count < 6)
 	{
-		if (is_texture_line(line) &&
-			parse_texture_line(line, config))
-				config_count++;
-		else if (is_color_line(line) &&
-			parse_color_line(line, config))
-				config_count++;
+		if (is_texture_line(line) && parse_texture_line(line, config))
+			config_count++;
+		else if (is_color_line(line) && parse_color_line(line, config))
+			config_count++;
 		else if (ft_strncmp(line, "\n", 1) != 0)
 		{
 			printf("Error: Invalid line in configuration file\n");
 			free(line);
-			exit (1);
+			exit(1);
 		}
 		free(line);
 		if (config_count < 6)
@@ -62,14 +58,15 @@ void	read_config_lines(int fd, t_config *config)
 			line = get_next_line(fd);
 		}
 		else
-			return;
+			return ;
 	}
 }
 
 static void	remove_newline(char *line)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (!line)
 		return ;
 	while (line[i])
@@ -124,4 +121,3 @@ void	read_map_lines(int fd, t_map *map)
 		line = get_next_line(fd);
 	}
 }
-

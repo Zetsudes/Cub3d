@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 19:16:25 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/02 16:12:58 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:17:44 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	**map_copy_alloc_and_fill(char **map_copy, int height)
 
 char	**map_copy(char **map_copy)
 {
-	int		height;
+	int	height;
 
 	if (!map_copy)
 		return (NULL);
@@ -49,19 +49,20 @@ char	**map_copy(char **map_copy)
 	return (map_copy_alloc_and_fill(map_copy, height));
 }
 
-int is_traversable(char c)
+int	is_traversable(char c)
 {
 	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-int is_filled_or_wall(char c)
+int	is_filled_or_wall(char c)
 {
 	return (c == '1' || c == 'F');
 }
 
-void check_valid_char(char c)
+void	check_valid_char(char c)
 {
-	if (!(c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' '))
+	if (!(c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W'
+			|| c == ' '))
 	{
 		printf("Error: invalid character in map\n");
 		exit(1);
