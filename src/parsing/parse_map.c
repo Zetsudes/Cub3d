@@ -12,17 +12,22 @@
 
 #include "parsing.h"
 
+static void	is_map_null(char **map)
+{
+	if (!map)
+	{
+		printf("Error: Map is NULL\n");
+		exit(1);
+	}
+}
+
 static void	find_player(char **map, int *player_x, int *player_y)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	if (!map)
-    {
-        printf("Error: Map is NULL\n");
-        exit(1);
-    }
+	is_map_null(map);
 	while (map[y])
 	{
 		x = 0;
