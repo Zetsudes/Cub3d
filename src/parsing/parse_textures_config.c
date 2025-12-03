@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:00:54 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/02 16:17:40 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:18:41 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ static int	get_texture_index(char *line, int *i)
 	return (1);
 }
 
-static int	store_texture_path(char *line, int i, t_config *config)
+static void	set_textures_struct(char *line, int i, t_config *config)
 {
-	if (!line || !config)
-		return (0);
 	if (line[0] == 'N' && line[1] == 'O')
 	{
 		if (config->north)
@@ -75,6 +73,13 @@ static int	store_texture_path(char *line, int i, t_config *config)
 			free(config->east);
 		config->east = ft_strdup(line + i);
 	}
+}
+
+static int	store_texture_path(char *line, int i, t_config *config)
+{
+	if (!line || !config)
+		return (0);
+	set_textures_struct(line, i, config);
 	if ((line[0] == 'N' && line[1] == 'O' && !config->north) || (line[0] == 'S'
 			&& line[1] == 'O' && !config->south) || (line[0] == 'W'
 			&& line[1] == 'E' && !config->west) || (line[0] == 'E'
@@ -97,3 +102,4 @@ int	parse_texture_line(char *line, t_config *config)
 		return (0);
 	return (1);
 }
+
