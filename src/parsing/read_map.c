@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/02 17:50:46 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/03 15:55:43 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,20 @@ void	read_config_lines(int fd, t_config *config)
 	}
 }
 
-static void	remove_newline(char *line)
+static int	is_empty_line(char *line)
+{
+	int i = 0;
+
+	while (line[i])
+	{
+	if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static void	remove_newline_at_end(char *line)
 {
 	int	i;
 
@@ -70,7 +83,10 @@ static void	remove_newline(char *line)
 	if (!line)
 		return ;
 	while (line[i])
+	{
+		printf("DEBUG: fdp\n");
 		i++;
+	}
 	if (i > 0 && line[i - 1] == '\n')
 		line[i - 1] = '\0';
 }
@@ -84,9 +100,11 @@ static void	process_map_line(char *line, t_map *map)
 	i = 0;
 	while (i < len)
 	{
+		printf("DEBUG: niquetamere\n");
 		check_valid_char(line[i]);
 		i++;
 	}
+	printf("DEBUG: lapute %c\n", line[i]);
 	map->data = add_line_in_tab(map->data, map->height, line);
 	if (len > map->width)
 		map->width = len;
@@ -95,9 +113,8 @@ static void	process_map_line(char *line, t_map *map)
 
 void	read_map_lines(int fd, t_map *map)
 {
-	char	*line;
-	int		i;
-	int		has_content;
+	char *line;
+	int map_started = 0;
 
 	map->data = NULL;
 	map->height = 0;
@@ -105,19 +122,28 @@ void	read_map_lines(int fd, t_map *map)
 	line = get_next_line(fd);
 	while (line)
 	{
-		remove_newline(line);
-		has_content = 0;
-		i = 0;
-		while (line[i])
+		remove_newline_at_end(line);
+		if (!map_started)
 		{
-			if (line[i] != ' ')
-				has_content = 1;
-			i++;
+			if (is_empty_line(line))
+			{
+				free(line);
+				line = get_next_line(fd);
+				continue;
+			}
+			else
+				map_started = 1;
 		}
-		if (has_content)
-			process_map_line(line, map);
 		else
-			free(line);
+		{
+			if (is_empty_line(line))
+			{
+				printf("Error: empty line inside the map\n");
+				free(line);
+				exit(1);
+			}
+		}
+		process_map_line(line, map);
 		line = get_next_line(fd);
 	}
 }
