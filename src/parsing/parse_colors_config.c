@@ -6,16 +6,30 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:43:54 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/02 18:12:02 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/03 17:03:04 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+void	comma_check(char *str, int *i, int *is_comma)
+{
+	if (str[*i] == ',')
+	{
+		(*is_comma)++;
+		(*i)++;
+	}
+	if (*is_comma > 1)
+	{
+		printf("Error: Too many commas in color value.\n");
+		exit (-1);
+	}
+}
+
 static int	ft_atoi_color(char *str, int *i)
 {
 	int	rgb;
-	int is_comma;
+	int	is_comma;
 
 	rgb = 0;
 	is_comma = 0;
@@ -33,16 +47,7 @@ static int	ft_atoi_color(char *str, int *i)
 		rgb = rgb * 10 + (str[*i] - '0');
 		(*i)++;
 	}
-	if (str[*i] == ',')
-	{
-		is_comma++;
-		(*i)++;
-	}
-	if (is_comma > 1)
-	{
-		printf("Error: Too many commas in color value.\n");
-		exit (-1);
-	}
+	comma_check(str, i, &is_comma);
 	return (rgb);
 }
 

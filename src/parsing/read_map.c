@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/03 16:46:28 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:48:25 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,6 @@ void	read_config_lines(int fd, t_config *config)
 		else
 			return ;
 	}
-}
-
-int	is_empty_line(char *line)
-{
-	int i = 0;
-
-	while (line[i])
-	{
-	if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 static void	remove_newline_at_end(char *line)

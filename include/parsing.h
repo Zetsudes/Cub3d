@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:04 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/03 16:46:05 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:48:43 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void			parse_map(t_map *map, char *filename);
 
 // read_map.c
 void			read_config_lines(int fd, t_config *config);
-int				is_empty_line(char *line);
 void			read_map_lines(int fd, t_map *map);
 
 // read_map_utils.c
 void			init_map(t_map *map, int *map_started);
+int				is_empty_line(char *line);
 void			error_empty_line(char *line);
 
 // parse_file.c
