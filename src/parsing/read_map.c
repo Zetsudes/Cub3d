@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/03 15:55:43 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:04:43 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,7 @@ static void	remove_newline_at_end(char *line)
 	if (!line)
 		return ;
 	while (line[i])
-	{
-		printf("DEBUG: fdp\n");
 		i++;
-	}
 	if (i > 0 && line[i - 1] == '\n')
 		line[i - 1] = '\0';
 }
@@ -100,11 +97,9 @@ static void	process_map_line(char *line, t_map *map)
 	i = 0;
 	while (i < len)
 	{
-		printf("DEBUG: niquetamere\n");
 		check_valid_char(line[i]);
 		i++;
 	}
-	printf("DEBUG: lapute %c\n", line[i]);
 	map->data = add_line_in_tab(map->data, map->height, line);
 	if (len > map->width)
 		map->width = len;
