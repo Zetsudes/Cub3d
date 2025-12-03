@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/03 16:04:43 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:46:28 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	read_config_lines(int fd, t_config *config)
 	}
 }
 
-static int	is_empty_line(char *line)
+int	is_empty_line(char *line)
 {
 	int i = 0;
 
@@ -109,11 +109,9 @@ static void	process_map_line(char *line, t_map *map)
 void	read_map_lines(int fd, t_map *map)
 {
 	char *line;
-	int map_started = 0;
+	int map_started;
 
-	map->data = NULL;
-	map->height = 0;
-	map->width = 0;
+	init_map(map, &map_started);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -130,14 +128,7 @@ void	read_map_lines(int fd, t_map *map)
 				map_started = 1;
 		}
 		else
-		{
-			if (is_empty_line(line))
-			{
-				printf("Error: empty line inside the map\n");
-				free(line);
-				exit(1);
-			}
-		}
+			error_empty_line(line);
 		process_map_line(line, map);
 		line = get_next_line(fd);
 	}
