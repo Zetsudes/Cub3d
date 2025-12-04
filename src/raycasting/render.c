@@ -6,7 +6,7 @@
 /*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:36:18 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/04 02:45:46 by zetsu            ###   ########.fr       */
+/*   Updated: 2025/12/04 04:08:04 by zetsu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,39 +40,12 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 // 	}
 // }
 
-void draw_wall(t_game *game, int x, double dist, int side, double ray_dx, double ray_dy)
+void draw_wall(t_game *game, int x, t_wall_info ray_info)
 {
-    int     line_height;
-    int     top, bottom;
-    int     tex_x, tex_id;
-    double  step, tex_pos;
-    t_data  *tex;
-    int     y;
-
-    if (dist < 0.0001) dist = 0.0001; 
-    line_height = (int)((double)win_height / dist);
-    top = (win_height / 2) - (line_height / 2);
-    bottom = (win_height / 2) + (line_height / 2);
-    if (top < 0) top = 0;
-    if (bottom >= win_height) bottom = win_height - 1;
-    get_tex_x_id(game, dist, side, ray_dx, ray_dy, &tex_id, &tex_x);
-    tex = &game->textures[tex_id];
-	step = 1.0 * tex->height / line_height;
-    tex_pos = (top - win_height / 2 + line_height / 2) * step;
-
-    y = top; 
-    while (y <= bottom)
-    {
-        int tex_y = (int)tex_pos & (tex->height - 1); 
-        tex_pos += step;
-        
-        int color = get_texture_pixel(tex, tex_x, tex_y);
-        if (side == 1)
-            color = (color >> 1) & 8355711;
-            
-        my_mlx_pixel_put(&game->img, x, y, color);
-        y++;
-    }
+    t_wall_info w; 
+    w = ray_info;
+    calculate_draw_parameters(game, &w);
+    draw_vertical_strip(game, x, &w);
 }
 
 // void	draw_minimap(t_data *img, char **map, t_player *player)
@@ -105,11 +78,9 @@ void draw_wall(t_game *game, int x, double dist, int side, double ray_dx, double
 
 static int create_trgb(int r, int g, int b)
 {
-    // Sets Alpha to 0xFF (fully opaque) and shifts R, G, B into place.
     return (0xFF000000 | (r << 16) | (g << 8) | b);
 }
 
-// Add this helper function (e.g., in render.c or a new draw_utils.c)
 static void	draw_background(t_game *game)
 {
 	int	ceiling_color;
@@ -127,9 +98,9 @@ static void	draw_background(t_game *game)
 		x = 0;
 		while (x < win_width)
 		{
-			if (y < win_height / 2) // Top half is Ceiling
+			if (y < win_height / 2)
 				my_mlx_pixel_put(&game->img, x, y, ceiling_color);
-			else // Bottom half is Floor
+			else 
 				my_mlx_pixel_put(&game->img, x, y, floor_color);
 			x++;
 		}

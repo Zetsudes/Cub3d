@@ -6,7 +6,7 @@
 /*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 10:58:10 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/04 01:00:09 by zetsu            ###   ########.fr       */
+/*   Updated: 2025/12/04 04:03:31 by zetsu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,33 @@ typedef struct s_keys
 	int			right;
 }				t_keys;
 
+typedef struct s_dda
+{
+    double  delta_x;
+    double  delta_y;
+    double  side_x;
+    double  side_y;
+    int     map_x;
+    int     map_y;
+    int     step_x;
+    int     step_y;
+    double  perp_dist;
+}               t_dda;
+
+typedef struct s_wall_info
+{
+    double  dist;   
+    int     side;   
+    double  ray_dx; 
+    double  ray_dy; 
+    t_data  *texture; 
+    int     tex_x;
+    double  tex_step;
+    double  tex_pos;
+    int     draw_start; 
+    int     draw_end;  
+} t_wall_info;
+
 typedef struct s_game
 {
 	t_data		img;
@@ -84,13 +111,14 @@ typedef struct s_game
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			draw_tile(t_data *img, int x, int start_y, int color);
 void			draw_minimap(t_data *img, char **map, t_player *player);
-void draw_wall(t_game *game, int x, double dist, int side, double ray_dx, double ray_dy);
+void draw_wall(t_game *game, int x, t_wall_info ray_info);
 void			render_frame(t_game *game);
+void    calculate_draw_parameters(t_game *game, t_wall_info *info);
+void    draw_vertical_strip(t_game *game, int x, t_wall_info *info);
 
 /****** Raycasting ******/
 double cast_one_ray(t_player *player, t_map *map, double ray_dx, double ray_dy, int *side);
 void cast_all_rays(t_player *player, t_map *map, t_game *game);
-
 /****** Player ******/
 void			init_player(t_player *p, t_map *map);
 void			move_forward(t_player *p, char **map);
