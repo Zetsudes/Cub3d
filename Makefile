@@ -1,7 +1,7 @@
 
 NAME    = cub3d
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror
+CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address
 RM      = rm -f
 
 SRC_DIR = src
@@ -19,7 +19,7 @@ MLX_REPO  = https://github.com/42Paris/minilibx-linux.git
 MLX_DIR   = target/minilibx
 MLX_A     = $(MLX_DIR)/libmlx.a
 
-LDFLAGS   = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+LDFLAGS   = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -g -fsanitize=address
 
 all: $(NAME)
 

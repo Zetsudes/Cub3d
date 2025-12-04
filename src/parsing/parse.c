@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 10:15:43 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/30 19:21:49 by pmeimoun         ###   ########.fr       */
+/*   Created: 2025/11/28 22:12:57 by pmeimoun          #+#    #+#             */
+/*   Updated: 2025/12/02 16:28:23 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "parsing.h"
 
-# include <fcntl.h>
-# include <stddef.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "../libft.h"
+void	parse_map(t_map *map, char *filename)
+{
+	int	fd;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+	fd = open_cub_file(filename);
+	if (fd < 0)
+		exit(1);
+	read_config_lines(fd, &map->config);
+	map->data = NULL;
+	map->height = 0;
+	map->width = 0;
+	read_map_lines(fd, map);
+	close(fd);
+}

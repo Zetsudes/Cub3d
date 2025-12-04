@@ -3,34 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamohame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:56:58 by zamohame          #+#    #+#             */
-/*   Updated: 2024/11/12 15:47:24 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:32:22 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int a)
+int	ft_strchr(const char *s, int c)
 {
 	int	i;
 
+	if (!s)
+		return (0);
 	i = 0;
-	if (a < 0 || a > 255)
-		return ((char *)str);
-	while (str[i] && str[i] != a)
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return (1);
 		i++;
-	if (str[i] == a)
-		return ((char *)&str[i]);
-	return (NULL);
+	}
+	return (0);
 }
-/*
-int	main(void)
-{
-	char	str[] = "Hello les ploucs";
-	char	*res = ft_strchr(str, 'z' + 256);
-	printf("%s", res);
-}
-*/
+

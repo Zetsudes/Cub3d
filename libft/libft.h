@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamohame <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 11:21:41 by zamohame          #+#    #+#             */
-/*   Updated: 2024/11/15 18:54:23 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/11/30 19:45:21 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t n);
 size_t	ft_strlcat(char *dest, const char *src, size_t n);
 size_t	ft_strlen(const char *str);
 
-char	*ft_strchr(const char *str, int a);
+int		ft_strchr(const char *str, int a);
 char	*ft_strrchr(const char *str, int a);
 char	*ft_strnstr(const char *str, const char *to_find, size_t n);
 char	*ft_strdup(char *src);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
@@ -72,4 +72,4 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-#endif 
+#endif

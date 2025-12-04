@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 10:58:10 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/01 13:20:29 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:42:49 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define win_height 600
 # define FOV (M_PI / 3)
 
-# include "../target/minilibx/mlx.h"
+# include "parsing.h"
+# include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <math.h>
 # include <stddef.h>

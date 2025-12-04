@@ -3,29 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zamohame <zamohame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 14:49:38 by lfiorell@st       #+#    #+#             */
-/*   Updated: 2025/12/01 13:22:51 by zamohame         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:43:09 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "../include/parsing.h"
 #include "../include/raycasting.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-int main(void)
+int main(int ac, char **av)
 {
-    t_game  game;
-
-    game.map.data = map_data;
+	if (ac != 2)
+		return (1);
+	t_game  game;
+	ft_bzero(&game, sizeof(t_game));
+	parse_map(&game.map, av[1]);
+    /*char *map_data[] = {
+        "111111",
+        "100001",
+        "101001",
+        "1000P1",
+        "111111",
+        NULL
+    };*/
+    /*game.map.data = map_copy(map_data);
     game.map.width = 6;
     game.map.height = 5;
     game.map.player_start.x = 4
     game.map.player_start.y = 3;
-    game.map.player_start_dir = 'N';
-
+    game.map.player_start_dir = 'N';*/
+	verify_map_copy(&game.map);
     game.mlx = mlx_init();
     if (!game.mlx)
         return (1);
@@ -38,6 +50,6 @@ int main(void)
     mlx_put_image_to_window(game.mlx, game.win, game.img.img, 0, 0);
     setup_hooks(&game);
     mlx_loop(game.mlx);
-
+	free_config(&game.map.config);
     return (0);
 }
