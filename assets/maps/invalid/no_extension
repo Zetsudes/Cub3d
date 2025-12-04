@@ -1,9 +1,9 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
-F 220,100,0
-C 225,30,0
+NO ./assets/textures/Parede_64x6402.xpm
+SO ./assets/textures/Parede_64x6403.xpm
+WE ./assets/textures/Parede_64x6401.xpm
+EA ./assets/textures/Parede_64x6400.xpm
+F 242, 219, 231
+C 225,204,229
 1111111111111111111111111
 1000000000110000000000001
 1011000001110000000000001

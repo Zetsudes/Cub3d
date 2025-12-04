@@ -1,7 +1,7 @@
-NO ./assets/images/walls/Parede_64x6400.xpm
-SO ./assets/images/walls/Parede_64x6401.xpm
-WE ./assets/images/walls/Parede_64x6402.xpm
-EA ./assets/images/walls/Parede_64x6403.xpm
+NO ./assets/textures/Parede_64x6402.xpm
+SO ./assets/textures/Parede_64x6403.xpm
+WE ./assets/textures/Parede_64x6401.xpm
+EA ./assets/textures/Parede_64x6400.xpm
 F 242, 219, 231
 C 225,204,229
 
