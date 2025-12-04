@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:36:18 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/04 04:08:04 by zetsu            ###   ########.fr       */
+/*   Updated: 2025/12/04 13:41:48 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 // 	}
 // }
 
-void draw_wall(t_game *game, int x, t_wall_info ray_info)
+void	draw_wall(t_game *game, int x, t_wall_info ray_info)
 {
-    t_wall_info w; 
-    w = ray_info;
-    calculate_draw_parameters(game, &w);
-    draw_vertical_strip(game, x, &w);
+	t_wall_info	w;
+
+	w = ray_info;
+	calculate_draw_parameters(game, &w);
+	draw_vertical_strip(game, x, &w);
 }
 
 // void	draw_minimap(t_data *img, char **map, t_player *player)
@@ -76,9 +77,9 @@ void draw_wall(t_game *game, int x, t_wall_info ray_info)
 // 	my_mlx_pixel_put(img, x, y, 0xFF0000);
 // }
 
-static int create_trgb(int r, int g, int b)
+static int	create_trgb(int r, int g, int b)
 {
-    return (0xFF000000 | (r << 16) | (g << 8) | b);
+	return (0xFF000000 | (r << 16) | (g << 8) | b);
 }
 
 static void	draw_background(t_game *game)
@@ -100,7 +101,7 @@ static void	draw_background(t_game *game)
 		{
 			if (y < win_height / 2)
 				my_mlx_pixel_put(&game->img, x, y, ceiling_color);
-			else 
+			else
 				my_mlx_pixel_put(&game->img, x, y, floor_color);
 			x++;
 		}

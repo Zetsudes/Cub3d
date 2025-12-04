@@ -43,7 +43,7 @@ int	get_texture_pixel(t_data *data, int tex_x, int tex_y)
 void	get_tex_x_id(t_game *g, double dist, int side, double ray_dx,
 		double ray_dy, int *tex_id, int *tex_x)
 {
-	double wall_x;
+	double	wall_x;
 
 	if (side == 0)
 	{
