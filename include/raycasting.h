@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 10:58:10 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/01 15:11:49 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/04 01:00:09 by zetsu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define win_height 600
 # define FOV (M_PI / 3)
 
+# include "../target/minilibx/mlx.h"
 # include "parsing.h"
-# include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <math.h>
 # include <stddef.h>
@@ -45,6 +45,8 @@ typedef struct s_data
 	int			bpp;
 	int			line_length;
 	int			endian;
+	int			width;
+	int			height;
 }				t_data;
 
 typedef struct s_player
@@ -75,19 +77,19 @@ typedef struct s_game
 	t_keys		keys;
 	void		*mlx;
 	void		*win;
+	t_data		textures[4];
 }				t_game;
 
 /****** Render ******/
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void			draw_tile(t_data *img, int x, int start_y, int color);
 void			draw_minimap(t_data *img, char **map, t_player *player);
-void			draw_wall(t_data *img, int x, double dist);
+void draw_wall(t_game *game, int x, double dist, int side, double ray_dx, double ray_dy);
 void			render_frame(t_game *game);
 
 /****** Raycasting ******/
-double			cast_one_ray(t_player *player, t_map *map, double ray_dx,
-					double ray_dy);
-void			cast_all_rays(t_player *player, t_map *map, t_data *data);
+double cast_one_ray(t_player *player, t_map *map, double ray_dx, double ray_dy, int *side);
+void cast_all_rays(t_player *player, t_map *map, t_game *game);
 
 /****** Player ******/
 void			init_player(t_player *p, t_map *map);
@@ -102,6 +104,13 @@ void			rotate_right(t_player *p);
 int				close_game(t_game *game);
 int				handle_keypress(t_game *game);
 void			setup_hooks(t_game *game);
+
+/****** Textures ******/
+void			load_texture(t_game *game, t_data *data, char *path);
+void			init_textures(t_game *game);
+int get_texture_pixel(t_data *data, int tex_x, int tex_y);
+void get_tex_x_id(t_game *g, double dist, int side, double ray_dx, double ray_dy, 
+                  int *tex_id, int *tex_x);
 
 void			cleanup_game(t_game *game);
 #endif

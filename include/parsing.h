@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:04 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/03 16:48:43 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/04 02:04:22 by zetsu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void			parse_map(t_map *map, char *filename);
 // read_map.c
 void			read_config_lines(int fd, t_config *config);
 void			read_map_lines(int fd, t_map *map);
+void			remove_newline_at_end(char *line);
 
 // read_map_utils.c
 void			init_map(t_map *map, int *map_started);

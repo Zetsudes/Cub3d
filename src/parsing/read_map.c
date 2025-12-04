@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/03 16:48:25 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/04 02:12:56 by zetsu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	read_config_lines(int fd, t_config *config)
 	line = get_next_line(fd);
 	while (line && config_count < 6)
 	{
+		remove_newline_at_end(line);
 		if (is_texture_line(line) && parse_texture_line(line, config))
 			config_count++;
 		else if (is_color_line(line) && parse_color_line(line, config))
@@ -54,15 +55,13 @@ void	read_config_lines(int fd, t_config *config)
 		}
 		free(line);
 		if (config_count < 6)
-		{
 			line = get_next_line(fd);
-		}
 		else
 			return ;
 	}
 }
 
-static void	remove_newline_at_end(char *line)
+void	remove_newline_at_end(char *line)
 {
 	int	i;
 
