@@ -1,2 +1,4 @@
 minilibx-linux
 *.o
+cub3D
+.vscode
