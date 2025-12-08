@@ -18,8 +18,7 @@ void	calculate_draw_parameters(t_game *game, t_wall_info *info)
 		info->draw_start = 0;
 	if (info->draw_end >= win_height)
 		info->draw_end = win_height - 1;
-	get_tex_x_id(game, temp_dist, info->side, info->ray_dx, info->ray_dy,
-		&tex_id, &info->tex_x);
+	get_tex_x_id(game, info, &tex_id, &info->tex_x);
 	info->texture = &game->textures[tex_id];
 	step = 1.0 * info->texture->height / line_height;
 	info->tex_pos = (info->draw_start - win_height / 2 + line_height / 2)

@@ -61,20 +61,20 @@ static int get_texture_id(int side, double ray_dx, double ray_dy)
     return (tex_id);
 }
 
-void	get_tex_x_id(t_game *g, double dist, int side, double ray_dx,
-		double ray_dy, int *tex_id, int *tex_x)
+void    get_tex_x_id(t_game *g, t_wall_info *info, int *tex_id, int *tex_x)
 {
-	double	wall_x;
+    double  wall_x;
 
-    *tex_id = get_texture_id(side, ray_dx, ray_dy);
-    if (side == 0)
-        wall_x = g->player.y + dist * ray_dy;
+    *tex_id = get_texture_id(info->side, info->ray_dx, info->ray_dy);
+    if (info->side == 0)
+        wall_x = g->player.y + info->dist * info->ray_dy;
     else
-        wall_x = g->player.x + dist * ray_dx;
+        wall_x = g->player.x + info->dist * info->ray_dx;
     wall_x -= floor(wall_x);
     *tex_x = (int)(wall_x * (double)g->textures[*tex_id].width);
-    if (side == 0 && ray_dx > 0)
+    if (info->side == 0 && info->ray_dx > 0)
         *tex_x = g->textures[*tex_id].width - *tex_x - 1;
-    if (side == 1 && ray_dy < 0)
+    if (info->side == 1 && info->ray_dy < 0)
         *tex_x = g->textures[*tex_id].width - *tex_x - 1;
+    info->tex_x = *tex_x;
 }

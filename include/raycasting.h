@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 10:58:10 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/04 13:40:55 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/08 14:23:10 by zetsu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,7 @@ void			calculate_draw_parameters(t_game *game, t_wall_info *info);
 void			draw_vertical_strip(t_game *game, int x, t_wall_info *info);
 
 /****** Raycasting ******/
-double			cast_one_ray(t_player *player, t_map *map, double ray_dx,
-					double ray_dy, int *side);
+double			cast_one_ray(t_player *player, t_map *map, t_wall_info *info);
 void			cast_all_rays(t_player *player, t_map *map, t_game *game);
 /****** Player ******/
 void			init_player(t_player *p, t_map *map);
@@ -138,8 +137,7 @@ void			setup_hooks(t_game *game);
 void			load_texture(t_game *game, t_data *data, char *path);
 void			init_textures(t_game *game);
 int				get_texture_pixel(t_data *data, int tex_x, int tex_y);
-void			get_tex_x_id(t_game *g, double dist, int side, double ray_dx,
-					double ray_dy, int *tex_id, int *tex_x);
-
+void			get_tex_x_id(t_game *g, t_wall_info *info, int *tex_id,
+					int *tex_x);
 void			cleanup_game(t_game *game);
 #endif
