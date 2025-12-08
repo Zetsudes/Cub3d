@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:04 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/04 02:04:22 by zetsu            ###   ########.fr       */
+/*   Updated: 2025/12/08 11:51:47 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ typedef struct s_pos
 	int			x;
 	int			y;
 }				t_pos;
+
+typedef struct s_colors
+{
+	int	r;
+	int	g;
+	int	b;
+}				t_colors;
+
 
 typedef struct s_config
 {

@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:00:54 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/03 17:18:41 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/08 12:42:49 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,3 @@ int	parse_texture_line(char *line, t_config *config)
 		return (0);
 	return (1);
 }
-

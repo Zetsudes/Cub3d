@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map_copy.c                                        :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 19:04:56 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/29 21:29:52 by pmeimoun         ###   ########.fr       */
+/*   Created: 2025/12/08 12:43:17 by pmeimoun          #+#    #+#             */
+/*   Updated: 2025/12/08 12:43:36 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,22 @@ static void	find_player(char **map, int *player_x, int *player_y)
 	exit(1);
 }
 
-static int	can_flood(char **map_copy, int x, int y, int width, int height)
+static int	can_flood(t_map *map, int x, int y)
 {
-	if (x < 0 || y < 0 || x >= width || y >= height)
+	if (x < 0 || y < 0 || x >= map->width || y >= map->height)
 	{
 		printf("Error: The map is not closed\n");
 		exit(1);
 	}
-	if (map_copy[y][x] == 'F')
+	if (map->data[y][x] == 'F')
 		return (0);
-	if (!is_traversable(map_copy[y][x]))
+	if (!is_traversable(map->data[y][x]))
 		return (0);
-	map_copy[y][x] = 'F';
+	map->data[y][x] = 'F';
 	return (1);
 }
 
-static void	flood_fill_recursive(char **map_copy, int x, int y, int width,
-		int height)
+static void	flood_fill_recursive(t_map *map, int x, int y)
 {
 	int	dx[4];
 	int	dy[4];
@@ -78,12 +77,12 @@ static void	flood_fill_recursive(char **map_copy, int x, int y, int width,
 	dy[1] = 0;
 	dy[2] = 1;
 	dy[3] = -1;
-	if (!can_flood(map_copy, x, y, width, height))
+	if (!can_flood(map, x, y))
 		return ;
 	i = 0;
 	while (i < 4)
 	{
-		flood_fill_recursive(map_copy, x + dx[i], y + dy[i], width, height);
+		flood_fill_recursive(map, x + dx[i], y + dy[i]);
 		i++;
 	}
 }
@@ -94,8 +93,7 @@ void	verify_map_copy(t_map *map)
 	int	y;
 
 	find_player(map->data, &map->player_start.x, &map->player_start.y);
-	flood_fill_recursive(map->data, map->player_start.x, map->player_start.y,
-		map->width, map->height);
+	flood_fill_recursive(map, map->player_start.x, map->player_start.y);
 	y = 0;
 	while (map->data[y])
 	{
