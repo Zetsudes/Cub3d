@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map_copy.c                                        :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/29 19:04:56 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/11/29 21:29:52 by pmeimoun         ###   ########.fr       */
+/*   Created: 2025/12/08 12:43:17 by pmeimoun          #+#    #+#             */
+/*   Updated: 2025/12/08 12:43:36 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	flood_fill_recursive(t_map *map, int x, int y)
 	i = 0;
 	while (i < 4)
 	{
-		flood_fill_recursive( map, x + dx[i], y + dy[i]);
+		flood_fill_recursive(map, x + dx[i], y + dy[i]);
 		i++;
 	}
 }

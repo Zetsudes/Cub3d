@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/04 02:12:56 by zetsu            ###   ########.fr       */
+/*   Updated: 2025/12/08 12:40:06 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ static void	process_map_line(char *line, t_map *map)
 
 void	read_map_lines(int fd, t_map *map)
 {
-	char *line;
-	int map_started;
+	char	*line;
+	int		map_started;
 
 	init_map(map, &map_started);
 	line = get_next_line(fd);
