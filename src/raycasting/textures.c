@@ -40,33 +40,41 @@ int	get_texture_pixel(t_data *data, int tex_x, int tex_y)
 	return (*(unsigned int *)src);
 }
 
+static int get_texture_id(int side, double ray_dx, double ray_dy)
+{
+    int tex_id;
+
+    if (side == 0) 
+    {
+        if (ray_dx > 0)
+            tex_id = 3; 
+        else
+            tex_id = 2; 
+    }
+    else
+    {
+        if (ray_dy > 0)
+            tex_id = 1; 
+        else
+            tex_id = 0; 
+    }
+    return (tex_id);
+}
+
 void	get_tex_x_id(t_game *g, double dist, int side, double ray_dx,
 		double ray_dy, int *tex_id, int *tex_x)
 {
 	double	wall_x;
 
-	if (side == 0)
-	{
-		if (ray_dx > 0)
-			*tex_id = 3;
-		else
-			*tex_id = 2;
-	}
-	else
-	{
-		if (ray_dy > 0)
-			*tex_id = 1;
-		else
-			*tex_id = 0;
-	}
-	if (side == 0)
-		wall_x = g->player.y + dist * ray_dy;
-	else
-		wall_x = g->player.x + dist * ray_dx;
-	wall_x -= floor(wall_x);
-	*tex_x = (int)(wall_x * (double)g->textures[*tex_id].width);
-	if (side == 0 && ray_dx > 0)
-		*tex_x = g->textures[*tex_id].width - *tex_x - 1;
-	if (side == 1 && ray_dy < 0)
-		*tex_x = g->textures[*tex_id].width - *tex_x - 1;
+    *tex_id = get_texture_id(side, ray_dx, ray_dy);
+    if (side == 0)
+        wall_x = g->player.y + dist * ray_dy;
+    else
+        wall_x = g->player.x + dist * ray_dx;
+    wall_x -= floor(wall_x);
+    *tex_x = (int)(wall_x * (double)g->textures[*tex_id].width);
+    if (side == 0 && ray_dx > 0)
+        *tex_x = g->textures[*tex_id].width - *tex_x - 1;
+    if (side == 1 && ray_dy < 0)
+        *tex_x = g->textures[*tex_id].width - *tex_x - 1;
 }
