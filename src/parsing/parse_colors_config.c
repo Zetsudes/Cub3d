@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:43:54 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/03 17:03:04 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/08 11:54:33 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,19 @@ static int	parse_rgb_values(char *line, int *r, int *g, int *b)
 	return (1);
 }
 
-static int	assign_color(char identifier, int r, int g, int b, t_config *config)
+static int	assign_color(char identifier, t_colors *colors, t_config *config)
 {
 	if (identifier == 'F')
 	{
-		config->floor[0] = r;
-		config->floor[1] = g;
-		config->floor[2] = b;
+		config->floor[0] = colors->r;
+		config->floor[1] = colors->g;
+		config->floor[2] = colors->b;
 	}
 	else if (identifier == 'C')
 	{
-		config->ceiling[0] = r;
-		config->ceiling[1] = g;
-		config->ceiling[2] = b;
+		config->ceiling[0] = colors->r;
+		config->ceiling[1] = colors->g;
+		config->ceiling[2] = colors->b;
 	}
 	else
 		return (0);
@@ -95,8 +95,8 @@ static int	assign_color(char identifier, int r, int g, int b, t_config *config)
 
 int	parse_color_line(char *line, t_config *config)
 {
-	int r, g, b;
-	if (!parse_rgb_values(line, &r, &g, &b))
+	t_colors colors;
+	if (!parse_rgb_values(line, &colors.r, &colors.g, &colors.b))
 		return (0);
-	return (assign_color(line[0], r, g, b, config));
+	return (assign_color(line[0], &colors, config));
 }
