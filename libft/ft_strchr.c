@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:56:58 by zamohame          #+#    #+#             */
-/*   Updated: 2025/11/30 19:32:22 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/09 08:37:22 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ int	ft_strchr(const char *s, int c)
 	}
 	return (0);
 }
-

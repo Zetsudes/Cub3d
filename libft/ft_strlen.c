@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:33:01 by zamohame          #+#    #+#             */
-/*   Updated: 2025/11/30 19:43:28 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/09 08:37:31 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,3 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-
