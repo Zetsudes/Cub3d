@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 14:49:38 by lfiorell@st       #+#    #+#             */
-/*   Updated: 2025/12/04 13:41:56 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/09 08:43:58 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main(int ac, char **av)
 	game.mlx = mlx_init();
 	if (!game.mlx)
 		return (1);
-	game.win = mlx_new_window(game.mlx, win_width, win_height, "Cub3D Test");
-	game.img.img = mlx_new_image(game.mlx, win_width, win_height);
+	game.win = mlx_new_window(game.mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D Test");
+	game.img.img = mlx_new_image(game.mlx, WIN_WIDTH, WIN_HEIGHT);
 	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bpp,
 			&game.img.line_length, &game.img.endian);
 	init_textures(&game);
