@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 22:11:04 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/08 11:51:47 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/09 08:11:43 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_colors
 	int	g;
 	int	b;
 }				t_colors;
-
 
 typedef struct s_config
 {

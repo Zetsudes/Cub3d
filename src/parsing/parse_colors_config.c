@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 22:43:54 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/08 12:42:36 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/09 07:55:17 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	comma_check(char *str, int *i, int *is_comma)
 	if (*is_comma > 1)
 	{
 		printf("Error: Too many commas in color value.\n");
-		exit (-1);
+		exit(-1);
 	}
 }
 
@@ -42,7 +42,7 @@ static int	ft_atoi_color(char *str, int *i)
 		if (str[*i] < '0' || str[*i] > '9')
 		{
 			printf("Error: Invalid character\n");
-			exit (-1);
+			exit(-1);
 		}
 		rgb = rgb * 10 + (str[*i] - '0');
 		(*i)++;
@@ -96,7 +96,7 @@ static int	assign_color(char identifier, t_colors *colors, t_config *config)
 int	parse_color_line(char *line, t_config *config)
 {
 	t_colors	colors;
-	
+
 	if (!parse_rgb_values(line, &colors.r, &colors.g, &colors.b))
 		return (0);
 	return (assign_color(line[0], &colors, config));

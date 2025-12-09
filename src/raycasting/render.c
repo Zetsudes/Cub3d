@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:36:18 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/08 13:52:43 by zetsu            ###   ########.fr       */
+/*   Updated: 2025/12/09 08:22:05 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || x > win_width || y < 0 || y >= win_height)
+	if (x < 0 || x > WIN_WIDTH || y < 0 || y >= WIN_HEIGHT)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
@@ -48,12 +48,12 @@ static void	draw_background(t_game *game)
 	floor_color = create_trgb(game->map.config.floor[0],
 			game->map.config.floor[1], game->map.config.floor[2]);
 	y = 0;
-	while (y < win_height)
+	while (y < WIN_HEIGHT)
 	{
 		x = 0;
-		while (x < win_width)
+		while (x < WIN_WIDTH)
 		{
-			if (y < win_height / 2)
+			if (y < WIN_HEIGHT / 2)
 				my_mlx_pixel_put(&game->img, x, y, ceiling_color);
 			else
 				my_mlx_pixel_put(&game->img, x, y, floor_color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:13:39 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/08 14:25:59 by zetsu            ###   ########.fr       */
+/*   Updated: 2025/12/09 08:23:21 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,43 +42,45 @@ static void	setup_dda_steps(t_player *p, double r_dx, double r_dy, t_dda *dda)
 	}
 }
 
-static double   perform_dda_loop(t_map *map, t_player *p, t_dda *dda, t_wall_info *info)
+static double	perform_dda_loop(t_map *map, t_player *p, t_dda *dda,
+		t_wall_info *info)
 {
-    while (1)
-    {
-        if (dda->side_x < dda->side_y)
-        {
-            dda->side_x += dda->delta_x;
-            dda->map_x += dda->step_x;
-            info->side = 0; 
-            dda->perp_dist = (dda->map_x - p->x + (1 - dda->step_x) / 2) / info->ray_dx;
-        }
-        else
-        {
-            dda->side_y += dda->delta_y;
-            dda->map_y += dda->step_y;
-            info->side = 1; 
-            dda->perp_dist = (dda->map_y - p->y + (1 - dda->step_y) / 2) / info->ray_dy;
-        }
-        if (dda->map_x < 0 || dda->map_y < 0 || dda->map_x >= map->width
-            || dda->map_y >= map->height
-            || map->data[dda->map_y][dda->map_x] == '1')
-            break ;
-    }
-    info->dist = dda->perp_dist;
-    return (dda->perp_dist);
+	while (1)
+	{
+		if (dda->side_x < dda->side_y)
+		{
+			dda->side_x += dda->delta_x;
+			dda->map_x += dda->step_x;
+			info->side = 0;
+			dda->perp_dist = (dda->map_x - p->x + (1 - dda->step_x) / 2)
+				/ info->ray_dx;
+		}
+		else
+		{
+			dda->side_y += dda->delta_y;
+			dda->map_y += dda->step_y;
+			info->side = 1;
+			dda->perp_dist = (dda->map_y - p->y + (1 - dda->step_y) / 2)
+				/ info->ray_dy;
+		}
+		if (dda->map_x < 0 || dda->map_y < 0 || dda->map_x >= map->width
+			|| dda->map_y >= map->height
+			|| map->data[dda->map_y][dda->map_x] == '1')
+			break ;
+	}
+	info->dist = dda->perp_dist;
+	return (dda->perp_dist);
 }
 
-double  cast_one_ray(t_player *player, t_map *map, t_wall_info *info)
+double	cast_one_ray(t_player *player, t_map *map, t_wall_info *info)
 {
-    t_dda   dda;
+	t_dda	dda;
 
-    dda.map_x = (int)player->x;
-    dda.map_y = (int)player->y;
-    
-    setup_dda_variables(info->ray_dx, info->ray_dy, &dda); 
-    setup_dda_steps(player, info->ray_dx, info->ray_dy, &dda);
-    return (perform_dda_loop(map, player, &dda, info));
+	dda.map_x = (int)player->x;
+	dda.map_y = (int)player->y;
+	setup_dda_variables(info->ray_dx, info->ray_dy, &dda);
+	setup_dda_steps(player, info->ray_dx, info->ray_dy, &dda);
+	return (perform_dda_loop(map, player, &dda, info));
 }
 
 void	cast_all_rays(t_player *player, t_map *map, t_game *game)
@@ -88,9 +90,9 @@ void	cast_all_rays(t_player *player, t_map *map, t_game *game)
 	double		camera_x_val;
 
 	col = 0;
-	while (col < win_width)
+	while (col < WIN_WIDTH)
 	{
-		camera_x_val = 2.0 * (double)col / (double)win_width - 1.0;
+		camera_x_val = 2.0 * (double)col / (double)WIN_WIDTH - 1.0;
 		wall_data.ray_dx = player->dir_x + player->plane_x * camera_x_val;
 		wall_data.ray_dy = player->dir_y + player->plane_y * camera_x_val;
 		cast_one_ray(player, map, &wall_data);

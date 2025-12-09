@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 16:32:05 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/03 16:48:30 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/09 07:54:37 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void	init_map(t_map *map, int *map_started)
 
 int	is_empty_line(char *line)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (line[i])
 	{
-	if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
 			return (0);
 		i++;
 	}
@@ -42,4 +43,3 @@ void	error_empty_line(char *line)
 		exit(1);
 	}
 }
-

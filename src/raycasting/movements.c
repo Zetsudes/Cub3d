@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 13:26:05 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/04 13:41:27 by pmeimoun         ###   ########.fr       */
+/*   Created: 2025/11/06 13:42:24 by zamohame          #+#    #+#             */
+/*   Updated: 2025/12/09 08:24:19 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	strafe_left(t_player *p, char **map)
 
 void	strafe_right(t_player *p, char **map)
 {
-	double nx;
-	double ny;
+	double	nx;
+	double	ny;
 
 	nx = p->x + p->plane_x * MOVE_SPEED;
 	ny = p->y + p->plane_y * MOVE_SPEED;

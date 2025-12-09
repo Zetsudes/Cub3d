@@ -6,7 +6,7 @@
 /*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 17:11:13 by pmeimoun          #+#    #+#             */
-/*   Updated: 2025/12/08 12:40:06 by pmeimoun         ###   ########.fr       */
+/*   Updated: 2025/12/09 07:54:52 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	read_map_lines(int fd, t_map *map)
 			{
 				free(line);
 				line = get_next_line(fd);
-				continue;
+				continue ;
 			}
 			else
 				map_started = 1;

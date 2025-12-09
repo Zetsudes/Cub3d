@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zetsu <zetsu@student.42.fr>                +#+  +:+       +#+        */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 10:58:10 by zamohame          #+#    #+#             */
-/*   Updated: 2025/12/08 14:23:10 by zetsu            ###   ########.fr       */
+/*   Updated: 2025/12/09 08:18:05 by pmeimoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define tile_size 1
-# define step_size 0.05
+# define TILE_SIZE 1
+# define STEP_SIZE 0.05
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.03
 # define PLANE_LEN 0.66
-# define win_width 800
-# define win_height 600
-# define FOV (M_PI / 3)
+# define WIN_WIDTH 800
+# define WIN_HEIGHT 600
+# define FOV 1.0471975513
 
 # include "../target/minilibx/mlx.h"
 # include "parsing.h"

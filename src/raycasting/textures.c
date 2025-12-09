@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmeimoun <pmeimoun@student.42nice.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/09 08:19:45 by pmeimoun          #+#    #+#             */
+/*   Updated: 2025/12/09 08:19:51 by pmeimoun         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "raycasting.h"
 
@@ -40,41 +51,41 @@ int	get_texture_pixel(t_data *data, int tex_x, int tex_y)
 	return (*(unsigned int *)src);
 }
 
-static int get_texture_id(int side, double ray_dx, double ray_dy)
+static int	get_texture_id(int side, double ray_dx, double ray_dy)
 {
-    int tex_id;
+	int	tex_id;
 
-    if (side == 0) 
-    {
-        if (ray_dx > 0)
-            tex_id = 3; 
-        else
-            tex_id = 2; 
-    }
-    else
-    {
-        if (ray_dy > 0)
-            tex_id = 1; 
-        else
-            tex_id = 0; 
-    }
-    return (tex_id);
+	if (side == 0)
+	{
+		if (ray_dx > 0)
+			tex_id = 3;
+		else
+			tex_id = 2;
+	}
+	else
+	{
+		if (ray_dy > 0)
+			tex_id = 1;
+		else
+			tex_id = 0;
+	}
+	return (tex_id);
 }
 
-void    get_tex_x_id(t_game *g, t_wall_info *info, int *tex_id, int *tex_x)
+void	get_tex_x_id(t_game *g, t_wall_info *info, int *tex_id, int *tex_x)
 {
-    double  wall_x;
+	double	wall_x;
 
-    *tex_id = get_texture_id(info->side, info->ray_dx, info->ray_dy);
-    if (info->side == 0)
-        wall_x = g->player.y + info->dist * info->ray_dy;
-    else
-        wall_x = g->player.x + info->dist * info->ray_dx;
-    wall_x -= floor(wall_x);
-    *tex_x = (int)(wall_x * (double)g->textures[*tex_id].width);
-    if (info->side == 0 && info->ray_dx > 0)
-        *tex_x = g->textures[*tex_id].width - *tex_x - 1;
-    if (info->side == 1 && info->ray_dy < 0)
-        *tex_x = g->textures[*tex_id].width - *tex_x - 1;
-    info->tex_x = *tex_x;
+	*tex_id = get_texture_id(info->side, info->ray_dx, info->ray_dy);
+	if (info->side == 0)
+		wall_x = g->player.y + info->dist * info->ray_dy;
+	else
+		wall_x = g->player.x + info->dist * info->ray_dx;
+	wall_x -= floor(wall_x);
+	*tex_x = (int)(wall_x * (double)g->textures[*tex_id].width);
+	if (info->side == 0 && info->ray_dx > 0)
+		*tex_x = g->textures[*tex_id].width - *tex_x - 1;
+	if (info->side == 1 && info->ray_dy < 0)
+		*tex_x = g->textures[*tex_id].width - *tex_x - 1;
+	info->tex_x = *tex_x;
 }
